@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>位移</title>
+<style type="text/css">
+*{
+    margin: 0;
+    padding: 0;
+}
+.box{
+	width: 200px;
+	height: 100px;
+	background: blue;
+	color: white;
+	text-align: center;
+	line-height: 100px;
+	margin:30px auto;
+	transition: all 1s;
+}
+.box1:hover{
+	transform:translateX(-100px);
+}
+.box2:hover{
+	transform:translateY(-100px);
+}
+
+.box3:hover{
+	transform: translateZ(300px);
+}
+.box4:hover{
+	/*transform:translate(100px,100px);*/
+	transform:translateX(100px) translateY(100px);
+}
+</style>
+</head>
+<body>
+	<div class="box box1">沿x轴位移</div>
+	<div class="box box2">沿y轴位移</div>
+	<div class="box box3">沿z轴位移</div>
+	<div class="box box4">位移</div>
+</body>
+</html>

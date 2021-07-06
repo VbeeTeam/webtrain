@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旋转</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 100px;
+            background: blue;
+            color: white;
+            text-align: center;
+            line-height: 100px;
+            margin: 30px auto;
+            transition: all 1s;
+        }
+
+        .box1 {
+            transform-origin: bottom;
+        }
+
+        .box1:hover {
+            transform: rotateX(-180deg);
+            /* transform:rotate3d(1,0,0,180deg); */
+        }
+
+        .box2 {
+            transform-origin: left;
+        }
+
+        .box2:hover {
+            transform: rotateY(180deg);
+            /*transform:rotate3d(0,1,0,180deg);*/
+        }
+
+        .box3:hover {
+            transform: rotateZ(-180deg);
+            /*transform: rotate3d(0,0,1,-180deg);*/
+        }
+
+        .box4 {
+            transform-origin: bottom right;
+        }
+
+        .box4:hover {
+            transform: rotate(-60deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box box1">沿x轴旋转</div>
+    <div class="box box2">沿y轴旋转</div>
+    <div class="box box3">沿z轴旋转</div>
+    <div class="box box4">旋转</div>
+</body>
+
+</html>

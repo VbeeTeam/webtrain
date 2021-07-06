@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>网页常见滑过效果</title>
+<style type="text/css">
+*{
+    margin: 0;
+    padding: 0;
+}
+.box{
+	width: 200px;
+	height: 200px;
+	border:10px solid #ac0;
+	margin:50px auto;
+	text-align: center;
+	overflow: hidden;
+}
+.box h2{
+	font-size: 20px;
+	line-height: 36px;
+	transform: translateY(-200px);
+	transition: all 1s;
+}
+.box h3{
+	font-size: 16px;
+	line-height: 26px;
+	margin-bottom: 6px;
+	transform: translateY(-230px);
+	transition: all 1s;
+}
+.imgs{
+	width: 90px;
+	height: 90px;
+	display: block;
+	margin: 0 auto;
+	transform: scale(2.5);
+	transition: all 1s;
+}
+.look{
+	display: block;
+	width: 100px;
+	height: 30px;
+	background: #ffc0cb;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 30px;
+	text-decoration: none;
+	color: black;
+	margin:6px auto 0;
+	transform: translateY(100px);
+	transition: all 1s;
+}
+.box:hover .imgs{
+	transform: scale(1);
+}
+.box:hover h2{
+	transform: translateY(0px);
+}
+.box:hover h3{
+	transform: translateY(0px);
+}
+.box:hover .look{
+	transform:translateY(0px);
+}
+</style>
+</head>
+<body>
+	<div class="box">
+		<h2>Web Design</h2>
+		<h3>Rasty Names</h3>
+		<img class="imgs" src="img/image01.jpg"/>
+		<a href="#" class="look">Take Look</a>
+	</div>
+</body>
+</html>

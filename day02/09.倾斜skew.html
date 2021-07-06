@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>倾斜</title>
+<style type="text/css">
+body,h1,h2,h3,h4,h5,h6,ol,ul,dl,dd,p,input,select,textarea,td{
+	margin:0;
+	padding:0;
+}
+.box{
+	width: 200px;
+	height: 100px;
+	background: blue;
+	color: white;
+	text-align: center;
+	line-height: 100px;
+	margin:30px auto;
+	transition: all 1s;
+}
+.box1{
+	transform-origin: bottom;
+}
+.box1:hover{
+	transform:skewX(30deg);
+}
+.box2{
+	transform-origin: right;
+}
+.box2:hover{
+	transform:skewY(-30deg);
+}
+.box3{
+	transform-origin: right top;
+}
+.box3:hover{
+	/*transform:skew(30deg,30deg);*/
+	transform:skewX(30deg) skewY(30deg);
+}
+</style>
+</head>
+<body>
+	<div class="box box1">沿x轴倾斜</div>
+	<div class="box box2">沿y轴倾斜</div>
+	<div class="box box3">倾斜</div>
+</body>
+</html>

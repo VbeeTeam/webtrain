@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>变形综合</title>
+<style type="text/css">
+*{
+    margin: 0;
+    padding: 0;
+}
+.box{
+	width: 80px;
+	height: 80px;
+	background: red;
+	margin:50px auto;
+	transition: all 1s;
+	text-align: center;
+	line-height: 80px;
+	color: white;
+}
+
+.box1:hover{
+	transform:scale(2) rotate(360deg);
+}
+
+.box2:hover{
+	transform:translateX(200px) rotate(360deg);
+}
+.box3:hover{
+	transform:translateX(200px) skewX(30deg);
+}
+</style>
+</head>
+<body>
+	<div class="box box1"></div>
+	<div class="box box2"></div>
+	<div class="box box3">c</div>
+</body>
+</html>
