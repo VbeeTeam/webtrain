@@ -1,0 +1,37 @@
+/**
+*登录页面样式
+*/
+.login{
+    width: 400px;
+    height: 250px;
+    background-color: lightskyblue;
+    border-radius: 5px;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+.login .title{
+    color: aqua;
+    letter-spacing:5px;
+}
+.login label{
+    display: inline-block;
+    width: 100px;
+    color: #fff;
+}
+.login input{
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+.login .submit{
+    width: 280px;
+    height: 40px;
+    background-color: aquamarine;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing:20px;
+}

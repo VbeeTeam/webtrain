@@ -1,0 +1,29 @@
+/**
+*图书管理样式
+*/
+
+.title {
+    background-color: lightgreen;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+}
+
+.title a {
+    font-weight: normal;
+}
+
+.content {
+    background-color: lightskyblue;
+}
+
+.search{
+    text-align: center;
+    padding: 20px 0;
+}
+input{
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 4px;
+}

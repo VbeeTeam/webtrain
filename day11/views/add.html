@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加图书</title>
+    <link rel="stylesheet" href="add.css" />
+</head>
+
+<body>
+    <div class="content">
+        <div class="title">
+            <h3>添加图书</h3>
+        </div>
+        <form action="/addBook" method="post">
+            名称：<input type="text" name="name" /><br /><br />
+            作者：<input type="text" name="author" /><br /><br />
+            分类：<input type="text" name="category" /><br /><br />
+            描述：<input type="text" name="desc" /><br /><br />
+            <input class="submit" type="submit" value="提交" />
+        </form>
+    </div>
+</body>
+
+</html>

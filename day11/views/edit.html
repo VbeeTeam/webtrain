@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改图书</title>
+    <link rel="stylesheet" href="add.css">
+</head>
+
+<body>
+    <div class="content">
+        <div class="title">
+            <h3>修改图书</h3>
+        </div>
+        <form action="/editBook" method="post">
+            <input type="hidden" name="id" value="{{id}}" />
+            名称：<input type="text" name="name" value="{{name}}" /><br /><br />
+            作者：<input type="text" name="author" value="{{author}}" /><br /><br />
+            分类：<input type="text" name="category" value="{{category}}" /><br /><br />
+            描述：<input type="text" name="desc" value="{{desc}}" /><br /><br />
+            <input class="submit" type="submit" value="提交" />
+        </form>
+    </div>
+</body>
+
+</html>
