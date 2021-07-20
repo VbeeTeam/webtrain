@@ -1,0 +1,10 @@
+#div2{
+    font-size: 25px;
+    color: brown;
+    p{
+        color: blue;
+        &:last-of-type{
+            color: chartreuse;
+        }
+    }
+}
