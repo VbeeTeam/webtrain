@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>循环渲染</title>
+</head>
+<body>
+    <div id="app">
+        <!-- item 数组中当前元素 -->
+        <!-- key 对象中表示键 -->
+        <!-- item 对象中键值 -->
+        <!-- index 表示索引 -->       
+        <!-- 数组渲染 -->
+        <ul>
+            <li v-for="(item,index) in list">
+                {{index}}--{{item}}
+            </li>
+        </ul>
+        <!-- 数组中的对象渲染 -->
+        <ul>
+            <li v-for="(item,index) in list2">
+                {{index}}--{{item.id}}--{{item.name}}
+            </li>
+        </ul>
+        <!-- 对象渲染 -->
+        <div v-for="(item,key,index) in obj">
+           {{index}}--{{key}}--{{item}}
+        </div>
+        <!-- 循环数字 -->
+        <div v-for="count in 10">
+            {{count}}
+        </div>
+        <!-- 嵌套循环 -->
+        <div v-for="item in list3">
+            <h3>{{item.title}}</h3>
+            <p v-for="item2 in item.arr">{{item2}}</p>
+        </div>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list:["列表1","列表2","列表3","列表4"],
+            list2:[
+                {
+                    id: 1,
+                    name: "西游记"
+                },
+                {
+                    id: 2,
+                    name: "红楼梦"
+                },
+                {
+                    id: 3,
+                    name: "水浒传"
+                },
+                {
+                    id: 4,
+                    name: "三国演义"
+                }
+            ],
+            obj: {
+                id: 1,
+                name: "猫猫",
+                color: "灰色"
+            },
+            list3: [
+                {
+                    title: "我是标题1",
+                    arr: ["列表1","列表2","列表3","列表4"]
+                },
+                {
+                    title: "我是标题2",
+                    arr: ["列表5","列表6","列表7","列表8"]
+                }
+            ]
+        },
+        methods: {
+        }
+    })
+</script>

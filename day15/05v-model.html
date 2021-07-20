@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model</title>
+    <style>
+        input{
+            width: 500px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h4>{{ msg }}</h4>
+
+        <!-- v-model 可以实现数据表单元素和Model中的数据双向绑定 -->
+        <input type="text" v-model="msg" @input="changeInput" />
+
+        <select v-model="selects" @change="selectChange">
+            <option>1</option>
+            <option>2</option>
+        </select>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //创建一个vue实例
+    var vm = new Vue({
+        el: "#app",    
+        data: {       
+            msg: "大家都是好学生，爱敲代码，爱学习，太完美了",
+            selects: "2"  
+        },
+        methods: {
+            //监听输入框改变事件
+            changeInput() {
+                console.log(this.msg);
+            },
+            //监听下拉框改变事件
+            selectChange() {
+                console.log(this.selects);
+            }
+        }
+    })
+
+</script>

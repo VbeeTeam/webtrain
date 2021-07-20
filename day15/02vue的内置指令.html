@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue内置指令</title>
+    <style>
+        .wrap{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 内置指令 -->
+        <!-- v-text 绑定元素的文本内容,用于更新标签包含的文本 缩写 >>> {{ }} -->
+        <p>{{ msg }}</p>
+        <p v-text="msg2"></p>
+        <!-- v-html 绑定元素html结构内容渲染-->
+        <p v-html="tag"></p>
+        <!-- v-bind 是用于绑定属性的指令，   缩写 >>> :属性 -->
+        <input type="button" value="按钮" v-bind:title="myTitle">
+        <div :class="classBoolean ? 'wrap' : 'box'"></div>
+        <div :style="{color:(styleBoolean ? 'yellow':'#000')}">我是style</div>
+        <!-- v-on 用于监听 DOM 事件 缩写 >>> @click @input-->
+        <input type="button" value="控制class" v-on:click="test1()">
+        <input type="button" value="控制style" v-on:click="test2()">
+        <a href="#" @mouseover="test3">滑过</a>
+        <!-- 做跑马灯案例 -->
+        <!-- v-model 数据双向绑定
+            v-for 列表渲染
+            v-if v-else-if v-else 条件渲染
+            v-show 显示隐藏 -->
+
+    </div>
+</body>
+
+</html>
+<!-- 引入vue的包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //创建一个vue实例
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "欢迎学习vue",
+            msg2: "哈哈，我是msg2",
+            tag: "<h1>哈哈，我是大大的H1，我大我骄傲！</h1>",
+            myTitle: "这是自己定义的title",
+            classBoolean: false,
+            styleBoolean: false,
+        },
+        //定义函数方法
+        methods: {
+            test1: function() {
+                vm.$data.classBoolean = !vm.$data.classBoolean;
+                // this.classBoolean = !this.classBoolean;
+            },
+            test2() {
+                this.styleBoolean = !this.styleBoolean;
+            },
+            test3() {
+                alert("划过");
+            }
+        }
+    })
+</script>

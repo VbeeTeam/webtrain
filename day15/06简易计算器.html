@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model</title>
+    <style>
+        input {
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="num1" />
+        <select v-model="opt">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="num2" />
+        <input type="button" value="=" @click="sum" />
+        <input type="text" v-model="result" />
+    </div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //创建一个vue实例
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            num1: 0,
+            num2: 0,
+            result: 0,
+            opt: "+"
+        },
+        methods: {
+            //计算值
+            sum() {
+                // switch (this.opt) {
+                //     case '+':
+                //         this.result = parseInt(this.num1) + parseInt(this.num2)
+                //         break;
+                //     case '-':
+                //         this.result = parseInt(this.num1) - parseInt(this.num2)
+                //         break;
+                //     case '*':
+                //         this.result = parseInt(this.num1) * parseInt(this.num2)
+                //         break;
+                //     case '/':
+                //         this.result = parseInt(this.num1) / parseInt(this.num2)
+                //         break;
+                // }
+                //eval() 函数作用：可以接受一个字符串str作为参数，并把这个参数作为脚本代码来执行。
+                //如果参数是一个表达式，eval() 函数将执行表达式；
+                //这是投机取巧的方式，开发中尽量不用
+                this.result = eval('parseInt(this.num1)' + this.opt + 'parseInt(this.num2)');
+            }
+        }
+    })
+</script>

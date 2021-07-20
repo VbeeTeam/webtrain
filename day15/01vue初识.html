@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue初识</title>
+</head>
+<body>
+    <!-- 2.被vue控制的元素 -->
+    <!-- 6.mvvm中的V -->
+    <div id="app">
+        <p>{{ msg }}</p>
+    </div>
+</body>
+</html>
+<!-- 1.引入vue的包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //3.创建一个vue实例 
+    //5.注意：我们new出来的对象，就是MVVM中的VM调度者
+    var vm = new Vue({
+        el: "#app",    //表示当前我们new的Vue示例，要控制页面上的哪个元素
+        //4.这里的data就是mvvm中的M,专门用来保存每个页面数据的
+        data: {        //data属性 表示存放的是el中要用到的数据
+            msg: "欢迎学习vue"  //通过vue提供的指令，很方便的就能把数据渲染到页面上，不需要在操作dom元素了
+        }
+    })
+
+</script>

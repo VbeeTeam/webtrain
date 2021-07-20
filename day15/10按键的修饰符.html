@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>按键的修饰符</title>
+</head>
+<body>
+    <div id="app">
+        
+        <input type="text" v-model="value"  @keyup.enter="test1" />
+        <input type="text" v-model="value2" @keyup.f2 = "test2" />
+        <input type="text" v-model="value3" @keyup.delete = "test3">
+
+        
+
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+
+    //自定义按键修饰符
+    // Vue.config.keyCodes.abc = 112 ;
+    // Vue.config.keyCodes.abc = 114;
+    // <!-- <input type="text" v-model="value4" @keyup.abc = "test4"> -->
+    
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            value: "回车",
+            value2: "F2",
+            value3: "delete",
+            value4: ""
+        },
+        methods: {
+            test1() {
+                alert("test1=" + this.value);
+
+            },
+            test2() {
+                alert("test2=" + this.value2)
+            },
+            test3() {
+                alert("我被删除了" + this.value3)
+            },
+            test4() {
+                alert("自定义")
+            }
+           
+        }
+    })
+</script>

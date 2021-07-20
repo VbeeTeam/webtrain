@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跑马灯</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="开启" v-on:click="go">
+        <input type="button" value="停止" v-on:click="stop">
+        <p>{{info}}</p>
+    </div>
+</body>
+
+</html>
+<!-- 引入vue的包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //创建一个vue实例
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            info: '猥琐发育，别浪~！',
+            intervalId: null
+        },
+        methods: {
+            //分析：
+            //1.点击开始按钮，绑定点击事件 v-on @
+            //2.在按钮的事件处理函数中，写相关的业务逻辑代码，拿到info字符串，然后截取字符串，把第一个字符串截取出来，放到最后一个位置
+            //3.实现自动截取功能，使用定时器
+            go() {
+                // 如果当前有定时器在运行，则直接return
+                if (this.intervalId != null) {
+                    return;
+                }
+                // 开始定时器
+                this.intervalId = setInterval(() => {
+                    //获取到头的第一个字符
+                    var start = this.info.substring(0, 1);
+                    console.log("start", start)
+                    //获取到后面字符串
+                    var end = this.info.substring(1);
+                    console.log("end", end)
+                    //重新拼接得到新的字符串，并赋值给info
+                    this.info = end + start;
+                    // this.info = this.info.substring(1) + this.info.substring(0, 1);
+                }, 500);
+            },
+            stop() {
+                //清空定时器
+                clearInterval(this.intervalId);
+                this.intervalId = null;
+            }
+            //4.注意：vm实例，会监听自己身上的data中所有数据的变化，只要数据发生变化，就会自动把最新的数据，从data上同步到页面中去，解放双手
+        }
+
+    });
+</script>

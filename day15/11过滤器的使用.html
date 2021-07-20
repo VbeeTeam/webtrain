@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过滤</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg | format("疯狂") | test}}</p>
+
+        <p>{{ info | formatStr}}</p>
+    </div>
+
+    <div id="app2">
+        <p>{{ info | formatStr}}</p>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+
+    //过滤器定义的语法
+    //Vue.filter("过滤器的名称（函数名）", function(){})
+    //过滤器中的function，第一个参数已经被规定死了，永远都是过滤器 管道符（|）前面传递过来的数据
+
+    //定义一个全局过滤器
+    //把单纯进行替换
+    Vue.filter("format", (msg, str) => {
+    //    return msg.replace("单纯", "邪恶"); （被替换的，新的）
+        // return msg.replace(/单纯/g, "邪恶");
+        return msg.replace(/单纯/g, str);
+    })
+
+    Vue.filter("test", function(msg) {
+        return msg + "=====";
+    })
+
+    Vue.filter("formatStr", (info) =>{
+        return info.replace("好", "");
+    })
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "你是一个单纯的人！你是一个单纯的人！",
+            info: "我是好人！"
+        },
+        methods:{
+
+        },
+        //私有过滤器
+        // filters: {
+        //     formatStr(info) {
+        //         return info.replace("好", "");
+        //     }
+        // }
+    })
+
+    var vm2 = new Vue({
+        el: "#app2",
+        data: {
+            msg: "你是一个单纯的人！你是一个单纯的人！",
+            info: "我是好人！"
+        },
+        methods:{
+
+        },
+        
+    })
+
+</script>

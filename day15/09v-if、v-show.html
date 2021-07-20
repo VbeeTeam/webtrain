@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>if-show</title>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="v-if控制" @click="ifClick" />
+        <input type="button" value="v-show控制" @click="showClick" />
+        <!-- 区别
+            v-if：每次删除和创建html元素，缺点：较高的切换性能消耗
+            v-show：显示隐藏元素，给html元素添加display：none
+            如果元素涉及到频繁的切换，最好使用v-show
+            v-if适合多条件切换
+        -->
+        <h3 v-if="ifBoolean">v-if控制的</h3>
+        <h3 v-show="showBoolean">v-show控制的</h3>
+
+        <div v-if="boolean == 'a' ">v-if1</div>
+        <div v-else-if="boolean == 'b' ">v-if2</div>
+        <div v-else-if="boolean == 'c' ">v-if3</div>
+        <div v-else>v-if4</div>
+        <!-- 类似于js的
+            if(){
+            }else if(){
+            }else{
+            }
+        -->
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            ifBoolean: true,
+            showBoolean: true,
+            boolean: "d"
+        },
+        methods: {
+            ifClick() {
+                this.ifBoolean = !this.ifBoolean;
+            },
+            showClick() {
+                this.showBoolean = !this.showBoolean;
+            }
+        }
+    })
+</script>

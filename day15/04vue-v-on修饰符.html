@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on修饰符</title>
+    <style>
+        .wrap {
+            width: 300px;
+            height: 300px;
+            background-color: lightseagreen;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- 使用.stop阻止事件冒泡 -->
+        <!-- <div class="wrap" @click="wrapClik">
+            <input type="button" value="点他" @click.stop="btnClick">
+        </div> -->
+        
+        <!-- 使用.capture 添加事件捕获模式 从外到里捕获 -->
+        <div class="wrap" @click.capture="wrapClik">
+            <input type="button" value="点他" @click="btnClick">
+        </div>
+
+        <!-- 使用.self 实现只有点击当前元素才能实现才会触发事件-->
+        <!-- <div class="wrap" @click.self="wrapClik">
+            <input type="button" value="点他" @click="btnClick">
+        </div> -->
+
+        <!-- 使用.prevent 阻止默认行为 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent="linkClick">有问题，去百度</a> -->
+        
+        <!-- 使用.once 只触发一次事件处理 -->
+        <a href="http://www.baidu.com" @click.prevent.once="linkClick">有问题，去百度</a>
+
+    </div>
+</body>
+
+</html>
+<!-- 引入vue的包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //创建一个vue实例
+    var vm = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        //定义函数方法
+        methods: {
+            //点击wrap
+            wrapClik() {
+                console.log("wrap被点击了");
+            },
+            //点击按钮
+            btnClick() {
+                console.log("btn被点击了");
+            },
+            linkClick() {
+
+            }
+        }
+    })
+</script>
