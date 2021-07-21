@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .myactive {
+            font-size: 20px;
+            font-weight: bold;
+            color: lightgreen;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+
+    <script src="./vue.js"></script>
+    <!-- 1. 导入包 -->
+    <script src="./vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/father">父组件</router-link>
+
+        <!-- 容器 使用 router-view 组件来显示匹配到的组件-->
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+    <template id="tmp1">
+        <div>
+            <h1>这是父层组件</h1>
+            <router-link to="/father/login">登录</router-link>
+            <router-link to="/father/register">注册</router-link>
+
+            <transition mode="out-in">
+                <router-view></router-view>
+            </transition>
+        </div>
+    </template>
+
+    <script>
+        // 2. 创建组件
+        var father = {
+            template: '#tmp1'
+        }
+
+        var login = {
+            template: '<h3>登录子组件</h3>'
+        }
+
+        var register = {
+            template: '<h3>注册子组件</h3>'
+        }
+
+        // 3. 创建一个路由对象
+        var router = new VueRouter({
+            routes: [ // 路由规则数组  //redirect路由重定向
+                {
+                    path: '/father',
+                    component: father,
+                    children:[
+                        {
+                            path: 'login',
+                            component: login,
+                        },
+                        {
+                            path: 'register',
+                            component: register,
+                        }
+                    ]
+                }
+            ],
+            linkActiveClass: 'myactive' // 和激活相关的类
+        })
+
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // router: router
+            router
+        });
+    </script>
+</body>
+
+</html>

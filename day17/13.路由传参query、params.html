@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .myactive{
+      font-size: 20px;
+      font-weight: bold;
+      color: lightgreen;
+    }
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateX(150px);
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 0.5s ease;
+    }
+  </style>
+
+  <script src="./vue.js"></script>
+  <!-- 1. 导入包 -->
+  <script src="./vue-router-3.0.1.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用 router-link 组件来导航 -->
+    <router-link to="/login?id=10&name=张三">登录</router-link>
+    <router-link to="/register/20/李四">注册</router-link>
+
+    <!-- 容器 使用 router-view 组件来显示匹配到的组件-->
+
+    <!-- <router-view></router-view> -->
+
+    <transition mode="out-in">
+      <router-view></router-view>
+    </transition>
+
+  </div>
+
+  <script>
+    // 2. 创建子组件
+    var login = {
+      template: '<h3>登录子组件--- {{$route.query.id}} - {{$route.query.name}}</h3>',
+      created () { //组件的生命周期
+          console.log(this.$route)
+          console.log(this.$route.query.id)
+      }
+    }
+
+    var register = {
+      template: '<h3>注册子组件---{{$route.params.id}}-{{$route.params.name}}</h3>',
+      created () { //组件的生命周期
+          console.log(this.$route)
+          console.log(this.$route.params.id)
+      }
+    }
+
+    // 3. 创建一个路由对象
+    var router = new VueRouter({
+      routes: [ // 路由规则数组  //redirect路由重定向
+        { path: '/', redirect: '/login' },
+        { path: '/login', component: login },
+        { path: '/register/:id/:name', component: register }
+      ],
+      linkActiveClass: 'myactive' // 和激活相关的类
+    })
+
+    // 创建 Vue 实例，得到 ViewModel
+    var vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {},
+      // router: router
+      router
+    });
+  </script>
+</body>
+
+</html>
