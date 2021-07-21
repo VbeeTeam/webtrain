@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品牌管理</title>
+    <style>
+        .title {
+            background-color: lightgreen;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .title a {
+            font-weight: normal;
+        }
+
+        .content {
+            background-color: lightskyblue;
+        }
+
+        .search {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            padding: 4px;
+        }
+
+        .toast{
+            width: 200px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background-color: aqua;
+            border-radius: 5px;
+            box-shadow: 0 0 0 5px #ccc;
+            position: absolute;
+            left: 50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+            z-index: 9;
+        }
+
+        .model{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            height: 200px;
+            background-color: lightsalmon;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #ccc;
+            text-align: center;
+            padding-top: 50px;
+            visibility: hidden;
+            transition: 0.4s;
+            z-index: 99;
+        }
+        .modelShow{
+            visibility: visible;
+        }
+        .model label{
+            display: inline-block;
+            width: 100px;
+        }
+        .model .btn{
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="title">
+            <h3>品牌管理</h3>
+        </div>
+        <div class="content">
+            <form class="search">
+                ID：<input type="text" v-model="id" />
+                Name：<input type="text" v-model="name" />
+                Status<input type="text" v-model="status" />
+                <input type="button" value="添加" @click="add" />
+                输入Name：<input type="text" v-model="keyword" />
+            </form>
+
+            <table width="100%" border="1" borderColor="orange" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr height="40">
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Ctime</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="center" height="40" v-for="item in search(keyword)" :key="item.id">
+                        <td @mouseover="overId(item)" @mouseout="toastBoolean = false" >{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td v-if="item.status == 0">未出库</td>
+                        <td v-else-if="item.status == 1">已出库</td>
+                        <td v-else-if="item.status == 2">已成交</td>
+                        <td v-else>胡输入呢</td>
+                        <td>{{ item.ctime | dateFormat}}</td>
+                        <td><a href="#" @click="edit(item)">修改</a> | <a href="#" @click="del(item.id)">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div v-show="toastBoolean" class="toast">
+              {{ toast }}
+            </div>
+
+            <div class="model" :class="modelBoolean ? 'modelShow' : ''">
+                <input type="hidden" v-model="model.id">
+                <label>Name</label><input type="text" v-model="model.name" /><br /><br />
+                <label>Status</label><input type="text" v-model="model.status" /><br /><br />
+                <input type="hidden" v-model="model.ctime" />
+                <input class="btn" type="button" value="修改" @click="submit" />
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<!-- 引入vue的包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script src="vue.js"></script>
+<script>
+    // status 0-未出库 1-已出库 2-已成交
+    //定义一个全局时间格式化过滤器
+    //padStart(maxlength, str) 填充字符串
+    Vue.filter("dateFormat", function(dateStr) {
+        //根据给定的时间字符串，得到特定时间
+        var dt = new Date(dateStr);
+        //获取年
+        var y = dt.getFullYear();
+        //获取月
+        var m = (dt.getMonth() + 1).toString().padStart(2, "0");
+        //获取日
+        var d = dt.getDate().toString().padStart(2, "0");
+        //获取时
+        var hh = dt.getHours().toString().padStart(2, "0");
+        //获取分
+        var mm = dt.getMinutes().toString().padStart(2, "0");
+        //获取秒
+        var ss = dt.getSeconds().toString().padStart(2, "0");
+        return `${y} - ${m} - ${d}  ${hh} : ${mm} : ${ss}`;
+    })
+
+    //创建一个vue实例
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            id: null,
+            name: "",
+            status: "",
+            list: [
+                {
+                    id: 1,
+                    name: "奔驰",
+                    ctime: new Date(),
+                    status: 0,
+                },
+                {
+                    id: 2,
+                    name: "宝马",
+                    ctime: new Date(),
+                    status: 1,
+                },
+                {
+                    id: 3,
+                    name: "劳斯莱斯",
+                    ctime: new Date(),
+                    status: 2
+                }
+            ],
+            keyword: "",
+            toast: "",
+            toastBoolean: false,
+            model: {
+                id: "",
+                name: "",
+                status: "",
+                ctime: ""
+            },
+            modelBoolean: false
+        },
+        methods: {
+            //添加数据
+            add() {
+                this.list.push({id: this.id, name: this.name, status: this.status, ctime: new Date()});
+                this.id = this.name = this.status = "";
+            },
+            //划过显示提示
+            overId(item) {
+                var str = "";
+                if(item.status == 0){
+                    str = "未出库"
+                }else if(item.status == 1){
+                    str = "已出库"
+                }else if(item.status == 2){
+                    str = "已成交"
+                }else{
+                    str = "胡输入呢"
+                }
+                this.toast = item.id + "-" + item.name + "-" + str;
+                console.log(this.toast);
+                this.toastBoolean = true;
+            },
+            //删除当前数据
+            del(id) {
+                this.list.forEach((item,index)=>{
+                    if(id == item.id){
+                        this.list.splice(index, 1);
+                    }
+                })
+            },
+            //查询
+            search(keyword) {
+                // var arr = [];
+                // this.list.forEach((item,index) =>{
+                //     //indexOf 查找字符串是否包含某字符 结果：有：0 无：-1
+                //     if(item.name.indexOf(this.keyword) != -1){
+                //         console.log("indexOf2", item.name.indexOf(this.keyword))
+                //         arr.push(item);
+                //     }
+                // })
+                // return arr;
+                
+                //filter 遍历数组过滤
+                return this.list.filter((item) =>{
+                    //包含 includes 有：true 无：false
+                    if(item.name.includes(keyword)){
+                        return item;
+                    }
+                })
+
+            },
+            //修改
+            edit(item) {
+                console.log(item);
+                this.model = item;
+                this.modelBoolean = true;
+                console.log(this.model)
+            },
+            //修改提交
+            submit() {
+                this.list.forEach((item) => {
+                    if(this.model.id == item.id){
+                        item = this.model;
+                    }
+                })
+                this.modelBoolean = false;
+            }
+
+        }
+    })
+
+
+</script>

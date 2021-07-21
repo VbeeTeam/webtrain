@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生命周期</title>
+</head>
+<body>
+    <div id="app">
+        {{ msg }}
+
+        <div id="title">
+            {{ title }}
+        </div>
+
+        <input type="button" value="按钮" @click="title = '改变的标题'" />
+
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "创建vue",
+            title: "标题"
+        },
+        methods: {
+            show() {
+                alert("vue被创建")
+            }
+        },
+        //实例化初始之后，数据观测（data observer）和methods（event/watcher）还没有被初始化
+        beforeCreate() {
+            console.log("beforeCreate", this.msg);
+            //在生命周期中调用函数方法需要加this
+            // this.show();
+        },
+        //数据观测（data observer）和methods（event/watcher）已经被初始化
+        created() {
+            console.log("created", this.msg);
+            //在生命周期中调用函数方法需要加this
+            // this.show();
+
+            var textTiltle = document.getElementById("title");
+            console.log("created", textTiltle);
+        },
+        //在el挂载开始之前被调用：相关的渲染函数首次被调用
+        beforeMount() {
+            var textTiltle = document.getElementById("title").innerText;
+            console.log("beforeMount", textTiltle);
+        },
+        //el被创建成功，数据渲染结束
+        mounted() {
+            var textTiltle = document.getElementById("title").innerText;
+            console.log("mounted", textTiltle);
+        },
+        //数据更新时调用
+        beforeUpdate() {
+            console.log("beforeUpdate1", this.title);
+        },
+        //dom已经更新完毕，数据已经更新完毕
+        updated() {
+            console.log("updated2", this.title);
+        },
+        
+        //组件销毁前的时候被调用 （学组件再看）
+        beforeDestroy() {
+        },
+        //组件已经销毁后会被调用
+        destroyed() {
+        }
+
+
+    })
+
+</script>
